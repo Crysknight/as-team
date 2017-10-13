@@ -1,0 +1,36 @@
+.astb-navbar {
+	height: 84px;
+	position: relative;
+	z-index: 80;
+	padding: 0;
+	&.astm-main-page {
+		background-color: transparent;
+	}
+	& > * {
+		height: 100%;
+	}
+	.aste-brand img {
+		width: 100px;
+	}
+	.aste-navbar-inner {
+		height: 100%;
+	}
+	.aste-navbar-list {
+		height: 100%;
+		margin-left: auto;
+		.aste-navlink {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			margin: 0 20px;
+			padding-left: 0;
+			padding-right: 0;
+			font-size: 14px;
+			color: $astCWhite;
+		}
+		.nav-item:last-child .aste-navlink {
+			margin-right: 0;
+		}
+	}
+}

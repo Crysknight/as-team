@@ -1,0 +1,35 @@
+
+/* =================================================================================================== */
+/* < LIBS > */
+/* =================================================================================================== */
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/utilities/display';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~@fancyapps/fancybox/dist/jquery.fancybox.css';
+
+
+/* =================================================================================================== */
+/* < BASE > */
+/* =================================================================================================== */
+
+@import './base/fonts';
+@import './base/variables';
+@import './base/mixins';
+@import './common';
+
+
+/* =================================================================================================== */
+/* < BLOCKS > */
+/* =================================================================================================== */
+
+// Common blocks
+@import './blocks/navbar';
+
+
+// Blocks belonging to certain pages
+// ....index.html
+@import './blocks/header-slider';

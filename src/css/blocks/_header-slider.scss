@@ -1,0 +1,36 @@
+.astb-header-slider {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	margin-top: -84px;
+	position: relative;
+	z-index: 60;
+	background-color: $astCCoal;
+	.aste-slider-block {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+	}
+	.aste-block-bg {
+		display: block;
+		position: absolute;
+	}
+	.aste-block-shade {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: transparentize($astCBlack, 0.65);
+	}
+	.aste-block-text {
+		z-index: 65;
+		color: $astCWhite;
+	}
+}

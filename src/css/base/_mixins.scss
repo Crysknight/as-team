@@ -1,0 +1,40 @@
+@mixin placeholder($color) {
+
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  &:-moz-placeholder {
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin respond-to($media) {
+  @if $media == xs {
+    @media (max-width: $sm) { @content; }
+  }
+  @else if $media == sm {
+    @media (min-width: $sm + 1) and (max-width: $md) { @content; }
+  }
+  @else if $media == md {
+    @media only screen and (min-width: $md + 1) and (max-width: $lg) { @content; }
+  }
+  @else if $media == lg {
+    @media only screen and (min-width: $lg + 1) and (max-width: $xl) { @content; }
+  }
+  @else if $media == xl {
+    @media only screen and (min-width: $xl + 1) { @content; }
+  }
+}
+
+@mixin respond-custom($mnw, $mxw) {
+  @media (min-width: $mnw) and (max-width: $mxw) { @content; }
+}

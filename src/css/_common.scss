@@ -4,15 +4,71 @@
 /* =================================================================================================== */
 
 body {
-	background-color: #000;
 	font-family: $astF1;
 	font-size: 21px;
+	* {
+		font-variant-numeric: lining-nums;
+	 	-moz-font-feature-settings: "lnum";
+		-webkit-font-feature-settings: "lnum";
+		font-feature-settings: "lnum";
+	}
+	@include respond-to(md) {
+		font-size: 18px;
+	}
+	@include respond-custom(320px, $md) {
+		font-size: 16px;
+	}
 }
 
 
 /* =================================================================================================== */
 /* < ELEMENTS > */
 /* =================================================================================================== */
+
+.aste-primary,
+.aste-secondary {
+	margin-bottom: 0;
+	font-family: $astF2;
+	line-height: 1.35;
+	letter-spacing: -2px;
+}
+.aste-primary {
+	font-size: 54px;
+	font-weight: bold;
+	@include respond-to(md) {
+		font-size: 40px;
+	}
+	@include respond-custom(320px, $md) {
+		font-size: 26px;
+	}
+}
+
+.aste-secondary {
+	font-size: 50px;
+	font-weight: normal;
+	@include respond-to(md) {
+		font-size: 38px;
+	}
+	@include respond-custom(320px, $md) {
+		font-size: 22px;
+	}
+}
+
+.aste-number {
+	font-size: 60px;
+	font-family: $astF2;
+	line-height: 1.2;
+	color: $astCGreen;
+	@include respond-to(md) {
+		font-size: 50px;
+	}
+	@include respond-to(sm) {
+		font-size: 40px;
+	}
+	@include respond-custom(320px, $sm) {
+		font-size: 25px;
+	}
+}
 
 
 /* =================================================================================================== */

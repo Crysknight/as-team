@@ -40,9 +40,9 @@
     "bootstrap": "^4.0.0-beta",
     "device.js": "^2.3.0",
     "jquery": "^3.2.1",
-    "slick-carousel": "^1.7.1",
     "masonry-layout": "^4.2.0",
-    "popper.js": "^1.11.1"
+    "popper.js": "^1.11.1",
+    "slick-carousel": "^1.8.1"
   },
   "keywords": [],
   "author": "",

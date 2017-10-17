@@ -3,8 +3,17 @@
 	position: relative;
 	z-index: 80;
 	padding: 0;
+	@include respond-custom(320px, $md) {
+		padding: 0 15px;
+	}
 	&.astm-main-page {
 		background-color: transparent;
+		.aste-navbar-list .aste-navlink {
+			color: $astCWhite;
+		}
+		.aste-navbar-list .aste-nav-bobber {
+			background-color: $astCWhite;
+		}
 	}
 	& > * {
 		height: 100%;
@@ -18,19 +27,58 @@
 	.aste-navbar-list {
 		height: 100%;
 		margin-left: auto;
+		position: relative;
 		.aste-navlink {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			height: 100%;
-			margin: 0 20px;
-			padding-left: 0;
-			padding-right: 0;
+			padding: 0 20px;
 			font-size: 14px;
-			color: $astCWhite;
+			color: $astCBlack;
+			html.mobile &, html.tablet & {
+				padding: 10px 20px;
+			}
+		}
+		.aste-nav-bobber {
+			display: block;
+			height: 3px;
+			position: absolute;
+			left: 0;
+			bottom: 25px;
+			background-color: $astCBlack;
 		}
 		.nav-item:last-child .aste-navlink {
 			margin-right: 0;
+		}
+	}
+	.aste-navbar-toggler {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		align-content: center;
+		height: 50px;
+		margin-left: auto;
+		outline: none;
+		.aste-icon-bar {
+			height: 3px;
+			width: 100%;
+			background-color: $astCWhite;
+			border-radius: 1.5px;
+			margin: 3px;
+		}
+	}
+	.aste-navbar-inner {
+		@include respond-custom(320px, $md) {
+			position: absolute;
+			top: 80px;
+			left: 0;
+			width: 100%;
+			z-index: 500;
+			.aste-navlink {
+				margin: 0;
+			}
 		}
 	}
 }

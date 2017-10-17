@@ -112,6 +112,11 @@ module.exports = {
 			template: 'src/index.html',
 			minify: false
 		}),
+		new HtmlWebpackPlugin({
+			filename: 'company.html',
+			template: 'src/company.html',
+			minify: false
+		}),
 		new CleanWebpackPlugin(['dist'])
 	],
 	devServer: {

@@ -20,7 +20,11 @@ import 'slick-carousel';
 /* < COMPONENTS > */
 /* =================================================================================================== */
 
+import './components/bobber';
 import './components/header-slider';
+import './components/screens-slider';
+import './components/screens-info';
+import './components/accom-slider';
 
 
 device.addClasses(document.documentElement);

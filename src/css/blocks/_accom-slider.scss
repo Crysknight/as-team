@@ -1,0 +1,62 @@
+.astb-accom-slider {
+	margin-top: 75px;
+	overflow: hidden;
+	.aste-primary,
+	.aste-secondary {
+		text-align: center;
+	}
+	.aste-accom-slider {
+		margin: 65px 0;
+	}
+	.aste-arrow {
+		display: block;
+		width: 45px;
+		height: 85px;
+		position: absolute;
+		top: 70px;
+		z-index: 70;
+		background-size: 15px 25px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		cursor: pointer;
+		&.astm-left {
+			left: -30px;
+			background-image: url('../img/left-arrow-grey.svg');
+		}
+		&.astm-right {
+			right: -30px;
+			background-image: url('../img/right-arrow-grey.svg');
+		}
+		@include respond-custom(320px, $sm) {
+			width: 30px;
+			&.astm-left {
+				left: -15px;
+			}
+			&.astm-right {
+				right: -15px;
+			}
+		}
+	}
+	.aste-slide {
+		padding: 0 15px;
+	}
+	.aste-slide-image-wrapper {
+		height: 230px;
+		overflow: hidden;
+		position: relative;
+		.aste-slide-image {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+	.aste-accom-title {
+		margin-top: 25px;
+		font-size: 21px;
+		font-weight: 600;
+	}
+	.aste-accom-address {
+		opacity: 0.85;
+	}
+}

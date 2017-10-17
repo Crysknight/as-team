@@ -1,0 +1,24 @@
+.astb-footer {
+	background-color: $astCCoal;
+	.aste-footer-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		align-content: center;
+		height: 50px;
+		font-size: 11px;
+		color: $astCWhite;
+		@include respond-custom(320px, $sm) {
+			height: 60px;
+		}
+	}
+	.aste-copyright-dev {
+		opacity: 0.5;
+		color: $astCWhite;
+		&:hover {
+			color: $astCWhite;
+			text-decoration: none;
+		}
+	}
+}

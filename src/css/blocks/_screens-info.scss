@@ -1,0 +1,73 @@
+.astb-screens-info {
+	padding-top: 65px;
+	background-color: $astCAlmostWhite;
+	.aste-info-introductory {
+		text-align: center;
+		.aste-introductory-text {
+			margin: 12px 0;
+			font-family: $astF2;
+			font-size: 30px;
+			@include respond-to(md) {
+				font-size: 24px;
+			}
+			@include respond-custom(320px, $md) {
+				font-size: 20px;
+			}
+		}
+	}
+	.aste-info-blocks {
+		height: 100vh;
+		position: relative;
+	}
+	.aste-info-block {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 60;
+		opacity: 0;
+		transition: all 0.3s;
+		.aste-block-content {
+			transition: all 0.55s;
+			transform: translateY(30px);
+		}
+		&.astm-active {
+			z-index: 65;
+			opacity: 1;
+			.aste-block-content {
+				transition: all 0.55s;
+				transform: translateY(0px);
+			}
+		}
+	}
+	.aste-block-row {
+		align-items: center;
+	}
+	.aste-block-link {
+		font-size: 15px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: $astCBlack;
+		img {
+			margin-left: 10px;
+			margin-top: -3px;
+		}
+		&:hover {
+			color: $astCBlack;
+			text-decoration: none;
+		}
+	}
+	.aste-block-image-wrapper {
+		margin: 0 -30px;
+		@include respond-custom(320px, $md) {
+			margin: 0;
+		}
+		.aste-block-image {
+			width: 100%;
+			box-shadow: 0 -5px 30px 10px $astCShadowGrey;
+		}
+	}
+}

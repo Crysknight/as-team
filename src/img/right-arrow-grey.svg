@@ -12,11 +12,11 @@
 <defs>
     <style>
       .cls-1 {
-        fill: #fff;
+        fill: #222;
         fill-rule: evenodd;
-        opacity: 0.85;
+        opacity: 0.5;
       }
     </style>
   </defs>
-  <path id="Left_Arrow" data-name="Left Arrow" class="cls-1" d="M106.642,354L95,366.152,106.448,378l1.358-1.418-10.029-10.43L108,355.418,106.642,354" transform="translate(-95 -354)"/>
+  <path id="Right_Arrow" data-name="Right Arrow" class="cls-1" d="M1193.36,354l-1.36,1.418,10.22,10.734-10.03,10.43,1.36,1.418L1205,366.152,1193.36,354" transform="translate(-1192 -354)"/>
 </svg>

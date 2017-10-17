@@ -1,0 +1,83 @@
+.astb-main-description {
+	padding-top: 70px;
+	.aste-description-container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.aste-description-left {
+		flex: 0 0 71%;
+		max-width: 71%;
+		margin-bottom: 25px;
+		padding-right: 30px;
+		&.astm-border-right {
+			border-right: 1px solid transparentize($astCBlack, 0.5);
+		}
+		@include respond-custom(320px, $sm) {
+			flex: 0 0 100%;
+			max-width: 100%;
+			&.astm-border-right {
+				border-right: none;
+			}
+		}
+	}
+	.aste-description-right {
+		flex: 0 0 29%;
+		max-width: 29%;
+		margin-bottom: 25px;
+		padding-left: 30px;
+		@include respond-custom(320px, $sm) {
+			flex: 0 0 100%;
+			max-width: 100%;
+			margin-top: 25px;
+			padding-left: 0;
+		}
+	}
+	.aste-description-left.astm-description-link,
+	.aste-description-right.astm-description-link {
+		@include respond-custom(320px, $sm) {
+			margin: 5px 0;
+		}
+	}
+	.aste-primary {
+		margin-top: -15px;
+	}
+	.aste-description {
+		margin: 20px 0 0;
+	}
+	.aste-percentages {
+		margin-top: -15px;
+	}
+	.aste-percentage-title {
+		margin-bottom: 55px;
+		font-size: 24px;
+		font-family: $astF2;
+		line-height: 1;
+		@include respond-to(md) {
+			font-size: 20px;
+			margin-bottom: 40px;
+		}
+		@include respond-custom(320px, $md) {
+			font-size: 18px;
+			margin-bottom: 20px;
+		}
+	}
+	.aste-percentage:last-child .aste-percentage-title {
+		margin-bottom: 0;
+	}
+	.aste-description-link {
+		font-size: 21px;
+		color: $astCBlue;
+		&:hover {
+			text-decoration: none;
+		}
+		@include respond-to(lg) {
+			font-size: 20px;
+		}
+		@include respond-to(md) {
+			font-size: 19px;
+		}
+		@include respond-custom(320px, $md) {
+			font-size: 16px;
+		}
+	}
+}

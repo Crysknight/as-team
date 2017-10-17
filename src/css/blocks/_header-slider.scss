@@ -6,6 +6,37 @@
 	position: relative;
 	z-index: 60;
 	background-color: $astCCoal;
+	.aste-arrows {
+		display: flex;
+		width: 100%;
+		z-index: 70;
+	}
+	.aste-arrow {
+		width: 200px;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		background-size: 15px 25px;
+		background-repeat: no-repeat;
+		cursor: pointer;
+		&.astm-left {
+			left: 0;
+			background-image: url('../img/left-arrow.svg');
+			background-position: right center;
+		}
+		&.astm-right {
+			right: 0;
+			margin-left: auto;
+			background-image: url('../img/right-arrow.svg');
+			background-position: left center;
+		}
+		&.astm-inactive {
+			opacity: 0.2;
+		}
+	}
+	.aste-container-sized-delimiter {
+		height: 100vh;
+	}
 	.aste-slider-block {
 		display: flex;
 		justify-content: center;
@@ -16,10 +47,18 @@
 		top: 0;
 		left: 0;
 		overflow: hidden;
+		opacity: 0;
+		transition: all 0.65s;
+		&.astm-active {
+			z-index: 65;
+			opacity: 1;
+		}
 	}
 	.aste-block-bg {
 		display: block;
 		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	.aste-block-shade {
 		width: 100%;
@@ -31,6 +70,10 @@
 	}
 	.aste-block-text {
 		z-index: 65;
+		text-align: center;
 		color: $astCWhite;
+		@include respond-custom(320px, $md) {
+			padding: 0 50px;
+		}
 	}
 }

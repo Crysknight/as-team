@@ -1,0 +1,19 @@
+.astb-company-first-screen {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	height: calc(100vh - 84px);
+	padding-top: 75px;
+	background-image: url('../img/company-gradient.png');
+	background-size: auto 100%;
+	.aste-primary, .aste-secondary {
+		width: 100%;
+		text-align: center;
+	}
+	.aste-first-screen-image {
+		position: absolute;
+		bottom: 0;
+		filter: drop-shadow(0 -5px 15px rgba(102, 102, 102, 0.5));
+	}
+}

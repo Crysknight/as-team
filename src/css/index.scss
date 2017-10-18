@@ -30,7 +30,7 @@
 
 // Common blocks
 @import './blocks/navbar';
-
+@import './blocks/social-graphs';
 
 // Blocks belonging to certain pages
 // ....index.html
@@ -43,3 +43,4 @@
 @import './blocks/footer';
 // ....company.html
 @import './blocks/company-first-screen';
+@import './blocks/company-paging';

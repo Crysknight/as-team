@@ -1,0 +1,81 @@
+.astb-company-paging {
+	position: relative;
+	.aste-paging-navbar {
+		width: 100%;
+		height: 60px;
+		position: absolute;
+		top: 0;
+		background-color: $astCWhite;
+		z-index: 60;
+		&.astm-tied {
+			position: fixed;
+		}
+	}
+	.aste-navbar-list {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 60px;
+		margin: 0 auto;
+		padding-left: 0;
+		position: relative;
+		.aste-navitem {
+			height: 60px;
+			list-style-type: none;
+		}
+		.aste-navlink {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 60px;
+			padding: 0 20px;
+			font-size: 15px;
+			color: $astCBlack;
+			&:hover {
+				color: $astCBlack;
+				text-decoration: none;
+			}
+		}
+		.aste-nav-bobber {
+			display: block;
+			height: 2px;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			background-color: $astCBlack;
+		}
+	}
+	.aste-company-page {
+		padding: 75px 0;
+	}
+	.aste-primary, .aste-secondary {
+		font-size: 35px;
+		line-height: 1.3;
+	}
+	.aste-primary,
+	.aste-secondary,
+	.aste-page-text {
+		text-align: center;
+	}
+	.aste-page-text {
+		margin: 25px 0 75px;
+	}
+	.aste-page-image {
+		width: 100%;
+	}
+	.aste-company-page.astm-page-1 {
+		padding-top: 135px;
+		background-color: $astCAlmostWhite;
+		.aste-page-text {
+			opacity: 0.85;
+		}
+	}
+	.aste-company-page.astm-page-2 {
+		background: #df5b3c; /* Old browsers */
+		background: -moz-linear-gradient(45deg, #df5b3c 0%, #d82f67 100%);
+		background: -webkit-linear-gradient(45deg, #df5b3c 0%,#d82f67 100%);
+		background: linear-gradient(45deg, #df5b3c 0%,#d82f67 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df5b3c', endColorstr='#d82f67',GradientType=1 );
+		color: $astCWhite;
+	}
+}

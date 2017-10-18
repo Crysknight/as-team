@@ -25,6 +25,7 @@ import './components/header-slider';
 import './components/screens-slider';
 import './components/screens-info';
 import './components/accom-slider';
+import './components/company-paging';
 
 
 device.addClasses(document.documentElement);

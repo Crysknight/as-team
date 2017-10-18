@@ -31,16 +31,16 @@
 //   font-style: italic;
 // }
 
-// @font-face {
-//   font-family: 'Raleway';
-//   src: url('../fonts/Raleway-SemiBold.eot');
-//   src: url('../fonts/Raleway-SemiBold.eot?#iefix') format('embedded-opentype'),
-//     url('../fonts/Raleway-SemiBold.woff') format('woff'),
-//     url('../fonts/Raleway-SemiBold.ttf') format('truetype'),
-//     url('../fonts/Raleway-SemiBold.svg#Raleway-SemiBold') format('svg');
-//   font-weight: 600;
-//   font-style: normal;
-// }
+@font-face {
+  font-family: 'Raleway';
+  src: url('../fonts/Raleway-SemiBold.eot');
+  src: url('../fonts/Raleway-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Raleway-SemiBold.woff') format('woff'),
+    url('../fonts/Raleway-SemiBold.ttf') format('truetype'),
+    url('../fonts/Raleway-SemiBold.svg#Raleway-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
 
 // @font-face {
 //   font-family: 'Raleway';

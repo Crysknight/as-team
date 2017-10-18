@@ -13,6 +13,17 @@ window.addEventListener('load', () => {
 				this.screens = this.screensSlider.find(this.screensSelector);
 				this.screensMargin = +this.screens.css('margin-left').replace(/px/, '');
 				this.screenSpace = -(this.screens.outerWidth() + this.screensMargin);
+				if (this.screens.length <= 8 && this.screens.length > 3) {
+					for (let i = 0; i < this.screens.length; i++) {
+						let fillerScreen = this.screens.eq(i).clone();
+						this.screensSlider.append(fillerScreen);
+					}
+				} else if (this.screens.length <= 3) {
+					for (let i = 0; i < this.screens.length * 3; i++) {
+						let fillerScreen = this.screens.eq(i).clone();
+						this.screensSlider.append(fillerScreen);
+					}
+				}
 				this.steepIsThePath();
 			}
 			steepIsThePath() {

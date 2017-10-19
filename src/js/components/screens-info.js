@@ -35,6 +35,7 @@ window.addEventListener('load', function() {
 				this.scrollBarWidth = getScrollbarWidth();
 				this.catchYa();
 				this.countScroll();
+				window.addEventListener('resize', this.onWindowResize.bind(this));
 			}
 			catchYa() {
 				if ($(window).scrollTop() > this.infoSliderOffset) {
@@ -118,6 +119,9 @@ window.addEventListener('load', function() {
 					this.belowSlider = true;
 					this.inSlider = false;
 				}
+			}
+			onWindowResize() {
+				this.infoSliderOffset = this.infoSlider.offset().top;
 			}
 		}
 		const infoSlider = new InfoSlider({

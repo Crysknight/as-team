@@ -8,10 +8,21 @@
 	}
 	&.astm-main-page {
 		background-color: transparent;
+		@include respond-custom(320px, $md) {
+			background-color: $astCBlack;
+		}
+		.aste-navbar-list {
+			@include respond-custom(320px, $md) {
+				background-color: $astCBlack;
+			}
+		}
 		.aste-navbar-list .aste-navlink {
 			color: $astCWhite;
 		}
 		.aste-navbar-list .aste-nav-bobber {
+			background-color: $astCWhite;
+		}
+		.aste-navbar-toggler .aste-icon-bar {
 			background-color: $astCWhite;
 		}
 	}
@@ -21,13 +32,15 @@
 	.aste-brand img {
 		width: 100px;
 	}
-	.aste-navbar-inner {
-		height: 100%;
-	}
 	.aste-navbar-list {
-		height: 100%;
+		height: 84px;
 		margin-left: auto;
 		position: relative;
+		@include respond-custom(320px, $md) {
+			height: auto;
+			padding-bottom: 20px;
+			background-color: $astCWhite;
+		}
 		.aste-navlink {
 			display: flex;
 			justify-content: center;
@@ -52,6 +65,12 @@
 			margin-right: 0;
 		}
 	}
+	.aste-navbar-toggler-button {
+		outline: none;
+		&:focus {
+			outline: none;
+		}
+	}
 	.aste-navbar-toggler {
 		display: flex;
 		justify-content: center;
@@ -60,11 +79,10 @@
 		align-content: center;
 		height: 50px;
 		margin-left: auto;
-		outline: none;
 		.aste-icon-bar {
 			height: 3px;
 			width: 100%;
-			background-color: $astCWhite;
+			background-color: $astCBlack;
 			border-radius: 1.5px;
 			margin: 3px;
 		}
@@ -72,7 +90,7 @@
 	.aste-navbar-inner {
 		@include respond-custom(320px, $md) {
 			position: absolute;
-			top: 80px;
+			top: 84px;
 			left: 0;
 			width: 100%;
 			z-index: 500;

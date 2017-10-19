@@ -1,0 +1,66 @@
+.astb-location {
+	min-height: 175px;
+	padding: 30px;
+	padding-left: 90px;
+	position: relative;
+	background-color: $astCWhite;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	cursor: pointer;
+	box-shadow: 0 0 0 0 transparentize($astCGreen, 0.95);
+	transition: all 0.3s;
+	&:hover {
+		box-shadow: 0 0 0 5px transparentize($astCGreen, 0.5);
+	}
+	&.astm-chosen {
+		border: 1px solid $astCGreen;
+		box-shadow: 0 0 0 0 transparentize($astCCherry, 0.95);
+		.aste-location-number {
+			background-color: $astCGreen;
+		}
+	}
+	.aste-location-number {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		top: 30px;
+		left: 30px;
+		border-radius: 5px;
+		background-color: $astCGrey;
+		font-size: 15px;
+		font-weight: 600;
+		color: $astCWhite;
+	}
+	.aste-location-title {
+		margin-bottom: 8px;
+		font-size: 15px;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+	.aste-location-address {
+		margin-bottom: 5px;
+		font-size: 18px;
+	}
+	.aste-location-additional {
+		margin-bottom: 5px;
+		font-size: 14px;
+		opacity: 0.75;
+	}
+	.aste-location-links {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+		.aste-location-link {
+			font-size: 14px;
+			color: $astCLightBlue;
+			&:hover {
+				color: $astCLightBlue;
+				text-decoration: none;
+			}
+		}
+	}
+}

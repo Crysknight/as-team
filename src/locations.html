@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AS Team - Места размещения рекламы</title>
+</head>
+<body>
+
+
+
+	${ 
+		require('./html/navbar.html')
+			.replace(
+				/([\s\S]*?)aste-navitem([\s\S]*?)aste-navitem([\s\S])/, 
+				'$1aste-navitem$2aste-navitem astm-active$3'
+			)
+	}
+
+
+
+	<div class="astb-locations">
+		<div class="aste-locations-list-wrapper">
+			<h2 class="aste-locations-list-title">Жилые комплексы</h2>
+			<ul class="aste-locations-list">
+				<!-- Here be locations -->
+			</ul>
+		</div>
+		<div class="aste-locations-map-wrapper">
+			<div class="aste-locations-map"></div>
+		</div>
+	</div>
+
+
+
+	${ require('./html/footer.html') }
+
+
+
+</body>
+</html>

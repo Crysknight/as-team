@@ -117,11 +117,16 @@ module.exports = {
 			template: 'src/company.html',
 			minify: false
 		}),
+		new HtmlWebpackPlugin({
+			filename: 'locations.html',
+			template: 'src/locations.html',
+			minify: false
+		}),
 		new CleanWebpackPlugin(['dist'])
 	],
 	devServer: {
 		proxy: {
-			"/ideal-pharma": {
+			"/as-team": {
 				target: "http://localhost"
 			}
 		}

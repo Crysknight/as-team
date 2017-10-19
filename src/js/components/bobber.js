@@ -1,5 +1,5 @@
 class NavBobber {
-	constructor(navList, navItems, activeMod) {
+	constructor(navList, navItems, activeMod, ) {
 		this.navList = $(navList);
 		this.navItemsSelector = navItems;
 		this.navItems = this.navList.find(navItems);
@@ -8,11 +8,12 @@ class NavBobber {
 		this.bobber = $('<li class="aste-nav-bobber"></li>');
 		this.bobberActive = false;
 		this.navList.prepend(this.bobber);
+		this.navItemPadding = +this.navItems.find('a').css('padding-left').replace(/px/, '');
 		this.navItems.on('mouseover', this.mouseOver.bind(this));
 		this.navItems.on('mouseout', this.mouseOut.bind(this));
 		if (this.hasActiveNav) {
-			this.activeNavWidth = this.activeNav.outerWidth() - 40;
-			this.activeNavLeft = +(this.activeNav.offset().left - this.navList.offset().left).toFixed(1) + 20;
+			this.activeNavWidth = this.activeNav.outerWidth() - this.navItemPadding * 2;
+			this.activeNavLeft = +(this.activeNav.offset().left - this.navList.offset().left).toFixed(1) + this.navItemPadding;
 			this.bobber.css({
 				'left': this.activeNavLeft,
 				'width': this.activeNavWidth
@@ -27,8 +28,8 @@ class NavBobber {
 		let targetLink = target.hasClass(this.navItemsSelector.replace(/\./, '')) ?
 			target.find('a') :
 			target;
-		let targetLinkWidth = targetLink.outerWidth() - 40;
-		let targetLinkLeft = +(targetLink.offset().left - this.navList.offset().left).toFixed(1) + 20;
+		let targetLinkWidth = targetLink.outerWidth() - this.navItemPadding * 2;
+		let targetLinkLeft = +(targetLink.offset().left - this.navList.offset().left).toFixed(1) + this.navItemPadding;
 		if (this.bobberActive) {
 			this.bobber.animate({
 				'left': targetLinkLeft,
@@ -46,16 +47,18 @@ class NavBobber {
 		let targetLink = target.hasClass(this.navItemsSelector.replace(/\./, '')) ?
 			target.find('a') :
 			target;
-		let targetLinkWidth = targetLink.outerWidth() - 40;
-		let targetLinkLeft = +(targetLink.offset().left - this.navList.offset().left).toFixed(1) + 20;
+		let targetLinkWidth = targetLink.outerWidth() - this.navItemPadding * 2;
+		let targetLinkLeft = +(targetLink.offset().left - this.navList.offset().left).toFixed(1) + this.navItemPadding;
 		this.mouseOutTimeout = setTimeout(() => {
 			if (this.hasActiveNav) {
+				let activeNavWidth = this.activeNav.outerWidth() - this.navItemPadding * 2;
+				let activeNavLeft = +(this.activeNav.offset().left - this.navList.offset().left).toFixed(1) + this.navItemPadding;
 				this.bobber.animate({
-					'left': this.activeNavLeft,
-					'width': this.activeNavWidth
+					'left': activeNavLeft,
+					'width': activeNavWidth
 				}, 300);
 			} else {
-				this.bobber.animate({ 'width': 0, 'left': targetLinkLeft + targetLinkWidth + 20 }, 300);
+				this.bobber.animate({ 'width': 0, 'left': targetLinkLeft + targetLinkWidth + this.navItemPadding }, 300);
 				this.bobberActive = false;
 			}
 		}, 300);

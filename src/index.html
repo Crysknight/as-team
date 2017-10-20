@@ -10,7 +10,9 @@
 
 
 	${ 
-		require('./html/navbar-main-page.html')
+		require('./html/navbar.html')
+			.replace(/astb-navbar/, 'astb-navbar astm-main-page')
+			.replace(/logo-colour\.svg/, 'logo.svg')
 	}
 
 

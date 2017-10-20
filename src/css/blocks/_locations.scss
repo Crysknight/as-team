@@ -8,9 +8,23 @@
 		flex: 0 0 36.5%;
 		max-width: 36.5%;
 		padding: 30px;
+		position: relative;
 		background-color: $astCAlmostWhite;
 		overflow: auto;
-		direction: rtl;
+		transition: all 0.3s;
+		box-shadow: inset 0 0 0 transparentize($astCGreen, 0.95);
+		&.astm-got-changes {
+			box-shadow: inset -30px 0 0 transparentize($astCGreen, 0.5);
+		}
+		&.astm-got-locations {
+			padding-bottom: 80px;
+		}
+		.astb-loader {
+			.aste-loader-circle {
+				width: 20vw;
+				height: 20vw;
+			}
+		}
 		.aste-locations-list-title {
 			margin-bottom: 25px;
 			font-size: 15px;
@@ -31,66 +45,25 @@
 		.aste-locations-map {
 			height: 100%;
 		}
-		.aste-locations-marker {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 30px;
-			height: 0;
-			margin-top: 10px;
-			position: relative;
-			border-radius: 4px;
-			background-color: $astCGrey;
-			font-size: 15px;
-			font-weight: 600;
-			color: transparent;
-			transition: all 0.3s;
-			transform: translateY(0);
-			cursor: pointer;
-			&:before {
-				content: '';
-				display: block;
-				width: 0;
-				height: 0;
-				position: absolute;
-				bottom: 0;
-				left: 7px;
-				border-top: 0px solid $astCGrey;
-				border-right: 8px solid transparent;
-				border-bottom: 0px solid transparent;
-				border-left: 8px solid transparent;
-				transition: all 0.3s;
-				cursor: pointer;
-			}
-			&:after {
-				content: '';
-				display: block;
-				width: 10px;
-				height: 10px;
-				position: absolute;
-				bottom: -25px;
-				left: 10px;
-				border-radius: 50%;
-				background-color: $astCGrey;
-				transition: all 0.3s;
-				cursor: pointer;
-			}
-			&.astm-chosen, &.astm-hover {
-				height: 30px;
-				margin-top: -20px;
-				color: $astCWhite;
-				background-color: $astCGreen;
-				&:before {
-					bottom: -36px;
-					border-top: 18px solid $astCGreen;
-					border-right: 8px solid transparent;
-					border-bottom: 18px solid transparent;
-					border-left: 8px solid transparent;
-				}
-				&:after {
-					background-color: $astCGreen;
-				}
-			}
+	}
+	.aste-locations-submit {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 36.5%;
+		height: 0;
+		position: absolute;
+		bottom: 50px;
+		background-color: $astCGreen;
+		font-size: 15px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: transparent;
+		transition: all 0.3s;
+		cursor: pointer;
+		&.astm-got-locations {
+			height: 50px;
+			color: $astCWhite;
 		}
 	}
 }

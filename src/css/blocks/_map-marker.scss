@@ -1,0 +1,72 @@
+.astb-map-marker {
+	width: 30px;
+	height: 30px;
+	margin-top: 0;
+	cursor: pointer;
+	z-index: 60;
+	transition: all 0.3s;
+	&.astm-chosen {
+		height: 64px;
+		margin-top: -34px;
+		.aste-marker-flag {
+			width: 30px;
+			height: 30px;
+			top: 0;
+			left: 0;
+			background-color: $astCGreen;
+			font-size: 15px;
+			font-weight: 600;
+			color: $astCWhite;
+			&:after {
+				bottom: -18px;
+				left: 7px;
+				border-top: 18px solid $astCGreen;
+				border-right: 8px solid transparent;
+				border-left: 8px solid transparent;
+			}
+		}
+		.aste-marker-point {
+			background-color: $astCGreen;
+		}
+	}
+	&.astm-hover .aste-marker-point {
+		background-color: $astCGreen;
+	}
+	.aste-marker-flag {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 0;
+		height: 0;
+		position: absolute;
+		top: -15px;
+		left: 15px;
+		border-radius: 5px;
+		background-color: $astCGrey;
+		color: transparent;
+		transition: all 0.55s;
+		&:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			border: 0px solid transparent;
+			border-top: 0px solid $astCGrey;
+			transition: all 0.55s;
+
+		}
+	}
+	.aste-marker-point {
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		left: 10px;
+		bottom: 10px;
+		border-radius: 50%;
+		background-color: $astCGrey;
+		transition: all 0.3s;
+	}
+}

@@ -1,0 +1,43 @@
+@keyframes spinSquare {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.astb-loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	.aste-loader-circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		border-radius: 50%;
+		background-color: $astCWhite;
+		overflow: hidden;
+	}
+	.aste-loader-inner-circle {
+		width: 98%;
+		height: 98%;
+		position: absolute;
+		z-index: 60;
+		border-radius: 50%;
+		background-color: $astCAlmostWhite;
+	}
+	.aste-loader-square-wrapper {
+		width: 100%;
+		height: 100%;
+		animation: spinSquare 1s infinite;
+	}
+	.aste-loader-square {
+		width: 50%;
+		height: 50%;
+		background-color: $astCGreen;
+	}
+}

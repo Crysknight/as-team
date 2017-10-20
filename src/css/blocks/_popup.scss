@@ -1,0 +1,86 @@
+.astb-popup {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	height: calc(100vh - 84px);
+	position: fixed;
+	z-index: -10;
+	top: 84px;
+	background-color: transparentize($astCBlack, 0.4);
+	overflow: auto;
+	opacity: 0;
+	transition: all 0.4s;
+	cursor: pointer;
+	&.astm-show {
+		z-index: 70;
+		opacity: 1;
+	}
+	&.astm-form .aste-popup-inner {
+		width: 410px;
+	}
+	.aste-popup-inner {
+		width: 50%;
+		min-height: 200px;
+		margin: 30px 0;
+		padding: 30px;
+		border-radius: 10px;
+		border: 1px solid $astCGreen;
+		background-color: $astCWhite;
+		box-shadow: 0 8px 18px transparentize($astCBlack, 0.65);
+		.astb-loader {
+			width: 100%;
+			height: 100%;
+			margin: 30px 0;
+			.aste-loader-circle {
+				width: 20vw;
+				height: 20vw;
+				background-color: $astCAlmostWhite;
+			}
+			.aste-loader-inner-circle {
+				background-color: $astCWhite;
+			}
+		}
+		.aste-popup-row {
+			margin-bottom: -30px;
+		}
+		.aste-popup-photo-wrapper {
+			height: 230px;
+			margin-bottom: 30px;
+			position: relative;
+			cursor: pointer;
+			overflow: hidden;
+			.aste-popup-photo {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}
+	}
+	.aste-subpopup {
+		display: none;
+		justify-content: center;
+		align-items: flex-start;
+		width: 100%;
+		height: calc(100vh - 84px);
+		position: absolute;
+		z-index: -10;
+		background-color: transparentize($astCBlack, 0.05);
+		overflow: auto;
+		opacity: 0;
+		transition: all 0.4s;
+		cursor: pointer;
+		&.astm-show {
+			display: flex;
+			z-index: 80;
+			opacity: 1;
+		}
+		.aste-subpopup-image {
+			max-width: 90vw;
+			max-height: calc(100vh - 204px);
+			margin: 60px 0;
+			cursor: default;
+		}
+	}
+}

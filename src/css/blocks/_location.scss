@@ -19,6 +19,9 @@
 			background-color: $astCGreen;
 		}
 	}
+	&.astm-just-unchosen:hover {
+		box-shadow: none;
+	}
 	.aste-location-number {
 		display: flex;
 		justify-content: center;
@@ -58,8 +61,8 @@
 			font-size: 14px;
 			color: $astCLightBlue;
 			&:hover {
-				color: $astCLightBlue;
-				text-decoration: none;
+				color: darken($astCLightBlue, 15%);
+				text-decoration: underline;
 			}
 		}
 	}

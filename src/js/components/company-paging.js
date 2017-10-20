@@ -81,7 +81,7 @@ $(document).ready(() => {
 				let page = pagesArray[(+pageHash[1] - 1)];
 				companyPagingBobber.setActiveNav(page.nav, page.page);
 				pagingNavbar.addClass('astm-tied');
-				$('html').animate({
+				$('html, body').animate({
 					scrollTop: page.pageStart + 2
 				}, 300, () => {
 					window.addEventListener('scroll', definePage);
@@ -90,7 +90,7 @@ $(document).ready(() => {
 			} else {
 				companyPagingBobber.setActiveNav(false);
 				pagingNavbar.removeClass('astm-tied');
-				$('html').animate({
+				$('html, body').animate({
 					scrollTop: 0
 				}, 300, () => {
 					window.addEventListener('scroll', definePage);

@@ -7,16 +7,16 @@
 	border: 1px solid transparent;
 	border-radius: 10px;
 	cursor: pointer;
-	box-shadow: 0 0 0 0 transparentize($astCGreen, 0.95);
+	box-shadow: 0 0 0 0 transparentize($astCYellowGreen, 0.95);
 	transition: all 0.3s;
 	&:hover {
-		box-shadow: 0 0 0 5px transparentize($astCGreen, 0.5);
+		box-shadow: 0 0 0 5px transparentize($astCYellowGreen, 0.5);
 	}
 	&.astm-chosen {
-		border: 1px solid $astCGreen;
+		border: 1px solid $astCYellowGreen;
 		box-shadow: 0 0 0 0 transparentize($astCCherry, 0.95);
 		.aste-location-number {
-			background-color: $astCGreen;
+			background-color: $astCYellowGreen;
 		}
 	}
 	&.astm-just-unchosen:hover {

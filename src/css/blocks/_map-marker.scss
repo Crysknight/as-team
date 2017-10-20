@@ -13,24 +13,24 @@
 			height: 30px;
 			top: 0;
 			left: 0;
-			background-color: $astCGreen;
+			background-color: $astCYellowGreen;
 			font-size: 15px;
 			font-weight: 600;
 			color: $astCWhite;
 			&:after {
 				bottom: -18px;
 				left: 7px;
-				border-top: 18px solid $astCGreen;
+				border-top: 18px solid $astCYellowGreen;
 				border-right: 8px solid transparent;
 				border-left: 8px solid transparent;
 			}
 		}
 		.aste-marker-point {
-			background-color: $astCGreen;
+			background-color: $astCYellowGreen;
 		}
 	}
 	&.astm-hover .aste-marker-point {
-		background-color: $astCGreen;
+		background-color: $astCYellowGreen;
 	}
 	.aste-marker-flag {
 		display: flex;

@@ -1,7 +1,137 @@
 .astb-form {
+	position: relative;
 	.aste-form-title {
 		font-size: 15px;
-		flex-wrap: wrap;
+		font-weight: 600;
 		text-transform: uppercase;
+	}
+	.aste-form-close {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		color: $astCYellowGreen;
+		font-weight: bold;
+		cursor: pointer;
+		&:before, &:after {
+			content: '';
+			width: 100%;
+			height: 3px;
+			position: absolute;
+			border-radius: 1px;
+			background-color: $astCYellowGreen;
+		}
+		&:before {
+			transform: rotate(45deg);
+		}
+		&:after {
+			transform: rotate(-45deg);
+		}
+	}
+	.aste-form-input, .aste-form-locations {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 52px;
+		margin-top: 20px;
+		padding-left: 15px;
+		border: none;
+		outline: none;
+		font-size: 14px;
+		background-color: $astCAlmostWhite;
+		@include placeholder($astCGrey);
+		&:focus {
+			border: none;
+			outline: none;
+		}
+	}
+	.aste-form-locations {
+		height: auto;
+		padding-top: 20px;
+	}
+	.aste-form-location {
+		display: flex;
+		align-items: center;
+		height: 40px;
+		margin-bottom: 20px;
+		margin-right: 20px;
+		position: relative;
+		padding: 0 50px 0 15px;
+		border: 1px solid $astCYellowGreen;
+		border-radius: 5px;
+		background-color: $astCWhite;
+		overflow: hidden;
+		.aste-location-delete {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 40px;
+			height: 38px;
+			position: absolute;
+			right: 0;
+			top: 0;
+			background-color: $astCYellowGreen;
+			cursor: pointer;
+			&:before, &:after {
+				content: '';
+				display: block;
+				width: 35%;
+				height: 2px;
+				position: absolute;
+				border-radius: 1px;
+				background-color: $astCWhite;
+			}
+			&:before {
+				transform: rotate(45deg);
+			}
+			&:after {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+	.aste-location-add {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 40px;
+		height: 40px;
+		margin-bottom: 20px;
+		position: relative;
+		border: 1px solid $astCYellowGreen;
+		border-radius: 5px;
+		cursor: pointer;
+		&:before, &:after {
+			content: '';
+			display: block;
+			width: 35%;
+			height: 2px;
+			position: absolute;
+			border-radius: 1px;
+			background-color: $astCYellowGreen;
+		}
+		&:before {
+			transform: rotate(90deg);
+		}
+	}
+	.aste-form-submit {
+		width: 160px;
+		height: 35px;
+		margin-top: 30px;
+		border: 1px solid $astCBlack;
+		outline: none;
+		background-color: transparent;
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: $astCBlack;
+		cursor: pointer;
+		&:focus {
+			outline: none;
+		}
 	}
 }

@@ -96,9 +96,9 @@ $(document).ready(() => {
 				return $(`
 					<form class="astb-form astm-locations">
 						<div class="aste-form-title">Заказать размещение</div>
-						<div class="aste-form-close">&plus;</div>
-						<input name="name" class="aste-form-name">
-						<input name="phone" class="aste-form-phone">
+						<div class="aste-form-close"></div>
+						<input name="name" class="aste-form-input aste-form-name" placeholder="Как к Вам обращаться?">
+						<input name="phone" class="aste-form-input aste-form-phone" placeholder="Ваш номер телефона">
 						<div class="aste-form-locations">
 							${locations.filter((location) => location.chosen).map((location) => {
 								return `
@@ -106,27 +106,33 @@ $(document).ready(() => {
 										<div class="aste-location-title">
 											${location.title}
 										</div>
-										<div class="aste-location-delete">&plus;</div>
+										<div class="aste-location-delete" data-id="${location.id}"></div>
 									</div>
 								`;
 							}).join('')}
-							<div class="aste-location-add">&plus;</div>
+							<div class="aste-location-add"></div>
 						</div>
+						<button type="submit" class="aste-form-submit">Отправить</button>
 					</form>
 				`);
 			};
 
 			let popup = $('.astb-popup');
+			popup._astf_close = function() {
+				$(this)
+					.removeClass('astm-show astm-form')
+					.removeAttr('style')
+					.find('.aste-popup-inner').empty();
+			};
 			popup.click(function(e) {
 				if ($(e.target).is('.astb-popup')) {
-					popup
-						.removeClass('astm-show astm-form')
-						.removeAttr('style')
-						.find('.aste-popup-inner').empty();
+					popup._astf_close();
 				}
 			});
 
 			let subpopup = popup.find('.aste-subpopup');
+
+			let errMessage = '<div class="aste-secondary">Что-то пошло не так. Перезагрузите страницу</div>';
 
 			let gotLocations = (resLocations) => {
 				let locationsHtml = '';
@@ -167,6 +173,7 @@ $(document).ready(() => {
 						e.stopPropagation();
 						popup.addClass('astm-show');
 						popup.find('.aste-popup-inner').append(loader);
+						// TODO
 						$.ajax(`/as-team/photos?id=${locations[i].id}`, {
 							success: (photos) => {
 								loader.remove();
@@ -195,6 +202,10 @@ $(document).ready(() => {
 										}
 									});
 								});
+							},
+							error: (err) => {
+								loader.remove();
+								popup.find('.aste-popup-inner').append(errMessage);
 							}
 						});
 					});
@@ -234,22 +245,46 @@ $(document).ready(() => {
 
 				submitLocations.click(() => {
 					if (locations.filter((location) => location.chosen).length === 0) return;
-					console.log(popup);
 					popup
 						.addClass('astm-show astm-form')
 						.find('.aste-popup-inner')
 						.append(submitForm());
+					popup.find('.aste-form-phone').mask('+7 (999) 999-99-99');
+					popup.find('.aste-location-add, .aste-form-close').click(() => {
+						popup._astf_close();
+					});
+					popup.find('.aste-location-delete').click(function() {
+						let formLocations = $(this).parents('.aste-form-locations');
+						let id = +$(this).attr('data-id');
+						let number;
+						for (let i = 0; i < locations.length; i++) {
+							if (locations[i].id === id) {
+								locations[i].chosen = false;
+								number = locations[i].number;
+							}
+						}
+						$(document).trigger(unchooseLocation, number);
+						$(this).parents('.aste-form-location').remove();
+						if (formLocations.find('.aste-form-location').length === 0) {
+							popup._astf_close();
+						}
+					});
+					popup.find('.astb-form').submit((e) => {
+						e.preventDefault();
+						console.log(e);
+					});
 				});
 
 			};
 
 			locationsListWrapper.append(loader);
 
+			// TODO
 			$.ajax('/as-team/locations', {
 				success: gotLocations,
 				error: (err) => {
 					loader.remove();
-					locationsList.append('<div class="aste-secondary">Что-то пошло не так. Перезагрузите страницу</div>');
+					locationsList.append(errMessage);
 				}
 			});
 

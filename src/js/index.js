@@ -14,6 +14,7 @@ import 'bootstrap/js/dist/collapse';
 import { device } from 'device.js';
 import '@fancyapps/fancybox';
 import 'slick-carousel';
+import './utils/jquery.maskedinput';
 
 
 /* =================================================================================================== */

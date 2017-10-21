@@ -34,9 +34,9 @@
 	.aste-locations-list-wrapper,
 	.aste-locations-map-wrapper {
 		height: calc(100vh - 134px);
-		html.mobile &, html.tablet {
+		html.mobile &, html.tablet & {
 			margin-top: 50px;
-			height: calc(100vh - 184px);
+			height: calc(100vh - 234px);
 		}
 	}
 	.aste-locations-list-wrapper {

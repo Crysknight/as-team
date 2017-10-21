@@ -122,13 +122,13 @@ $(document).ready(() => {
 						this.locations[i].listItem = $(`
 							<li class="aste-locations-item">
 								<div class="astb-location">
-									<div class="aste-location-number">${this.locations[i].sort_order}</div>
+									<div class="aste-location-number">${i + 1}</div>
 									<div class="aste-location-title">${this.locations[i].title}</div>
 									<div class="aste-location-address">${this.locations[i].address}</div>
 									<div class="aste-location-additional">${this.locations[i].additional}</div>
 									<div class="aste-location-links">
 										<div class="aste-location-link">Разместить рекламу здесь</div>
-										<div class="aste-location-link astm-photos">Фотографии ЖК</div>
+										${this.locations[i].photos ? '<div class="aste-location-link astm-photos">Фотографии ЖК</div>' : ''}
 									</div>
 								</div>
 							</li>

@@ -143,7 +143,7 @@ $(document).ready(() => {
 							new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng), 
 							map, 
 							{ 
-								number: this.locations[i].sort_order,
+								number: i + 1,
 								chooseLocation: () => this.chooseLocation(this.locations[i], 'marker')
 							}
 						);

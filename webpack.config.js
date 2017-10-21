@@ -126,8 +126,9 @@ module.exports = {
 	],
 	devServer: {
 		proxy: {
-			"/as-team": {
-				target: "http://localhost"
+			"/api": {
+				target: "http://localhost",
+				pathRewrite: { "^/api": "/as-team" }
 			}
 		}
 	}

@@ -2,82 +2,9 @@ import $script from 'scriptjs';
 
 import stretchAndCenter from '../utils/stretch-and-center';
 
-const locations = [];
-			
-let chooseLocation = $.Event('CHOOSE_LOCATION');
-let unchooseLocation = $.Event('UNCHOOSE_LOCATION');
-
 $(document).ready(() => {
 	if ($('.astb-locations').length > 0) {
 		$script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCWgWiXe4fdVDjYj6-APt80DhtH2o05w8U&amp', function() {
-
-			let map = new google.maps.Map(document.querySelector('.aste-locations-map'), {
-				center: { lat: 55.755246, lng: 37.622088 },
-				zoom: 10,
-				disableDefaultUI: true
-			});
-
-			let CustomMarker = function(latlng, map, args) {
-				this.latlng = latlng;	
-				this.args = args;	
-				this.setMap(map);	
-			};
-
-			CustomMarker.prototype = new google.maps.OverlayView();
-
-			CustomMarker.prototype.draw = function() {
-
-				let panes = this.getPanes();
-				let div = this.div;
-				if (!div) {
-					div = this.div = $(`
-						<div class="astb-map-marker">
-							<div class="aste-marker-flag">
-								${this.args.number}
-							</div>
-							<div class="aste-marker-point"></div>
-						</div>
-					`).css({ "position": "absolute" });
-					div.on('mouseover', (e) => { 
-						e.stopPropagation();
-						div.addClass('astm-hover');
-					});
-					div.on('mouseout', (e) => {
-						e.stopPropagation();
-						div.removeClass('astm-hover');
-					});
-					div.click((e) => {
-						e.stopPropagation();
-						if (!div.hasClass('astm-chosen')) {
-							$(document).trigger(chooseLocation, this.args.number);
-						} else {
-							$(document).trigger(unchooseLocation, this.args.number);
-						}
-					})
-					$(panes.overlayImage).append(div);
-				}
-
-				let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
-				if (point) {
-					div.css({ "left": `${point.x - 15}px`, "top": `${point.y - 15}px` });
-				}
-
-			};
-
-			CustomMarker.prototype.remove = function() {
-				if (this.div) {
-					this.div.parentNode.removeChild(this.div);
-					this.div = null;
-				}	
-			};
-
-			CustomMarker.prototype.getPosition = function() {
-				return this.latlng;	
-			};
-
-			let locationsListWrapper = $('.astb-locations .aste-locations-list-wrapper');
-
-			let locationsList = $('.astb-locations ul.aste-locations-list');
 
 			let loader = $(`
 				<div class="astb-loader">
@@ -89,198 +16,299 @@ $(document).ready(() => {
 					</div>
 				</div>
 			`);
-
-			let submitLocations = $('.aste-locations-submit');
-
-			let submitForm = () => {
-				return $(`
-					<form class="astb-form astm-locations">
-						<div class="aste-form-title">Заказать размещение</div>
-						<div class="aste-form-close"></div>
-						<input name="name" class="aste-form-input aste-form-name" placeholder="Как к Вам обращаться?">
-						<input name="phone" class="aste-form-input aste-form-phone" placeholder="Ваш номер телефона">
-						<div class="aste-form-locations">
-							${locations.filter((location) => location.chosen).map((location) => {
-								return `
-									<div class="aste-form-location">
-										<div class="aste-location-title">
-											${location.title}
-										</div>
-										<div class="aste-location-delete" data-id="${location.id}"></div>
-									</div>
-								`;
-							}).join('')}
-							<div class="aste-location-add"></div>
-						</div>
-						<button type="submit" class="aste-form-submit">Отправить</button>
-					</form>
-				`);
-			};
-
-			let popup = $('.astb-popup');
-			popup._astf_close = function() {
-				$(this)
-					.removeClass('astm-show astm-form')
-					.removeAttr('style')
-					.find('.aste-popup-inner').empty();
-			};
-			popup.click(function(e) {
-				if ($(e.target).is('.astb-popup')) {
-					popup._astf_close();
-				}
-			});
-
-			let subpopup = popup.find('.aste-subpopup');
-
 			let errMessage = '<div class="aste-secondary">Что-то пошло не так. Перезагрузите страницу</div>';
 
-			let gotLocations = (resLocations) => {
-				let locationsHtml = '';
-				let locationNumber = 1;
-				for (let location of resLocations) {
-					location.number = locationNumber;
-					locationNumber++;
-					locationsHtml += `
-						<li class="aste-locations-item">
-							<div class="astb-location">
-								<div class="aste-location-number">${location.number}</div>
-								<div class="aste-location-title">${location.title}</div>
-								<div class="aste-location-address">${location.address}</div>
-								<div class="aste-location-additional">${location.additional}</div>
-								<div class="aste-location-links">
-									<div class="aste-location-link">Разместить рекламу здесь</div>
-									<div class="aste-location-link astm-photos">Фотографии ЖК</div>
-								</div>
-							</div>
-						</li>		
-					`;
-					location.marker = new CustomMarker(new google.maps.LatLng(location.lat, location.lng), map, { number: location.number });
-					locations.push(location);
-				}
-				locationsList.append(locationsHtml);
-				loader.remove();
+			let locationsMap = new google.maps.Map(document.querySelector('.aste-locations-map'), {
+				center: { lat: 55.755246, lng: 37.622088 },
+				zoom: 10,
+				disableDefaultUI: true
+			});
 
-				for (let i = 0; i < $('.astb-location').length; i++) {
-					let item = locations[i].listItem = $('.astb-location').eq(i);
-					item.click(() => {
-						if (!item.hasClass('astm-chosen')) {
-							$(document).trigger(chooseLocation, i + 1);
-						} else {
-							$(document).trigger(unchooseLocation, i + 1);
+			class CustomMarker extends google.maps.OverlayView {
+				constructor(latlng, map, args) {
+					super();
+					this.latlng = latlng;
+					this.args = args;
+					this.setMap(map);
+				}
+				draw() {
+					let panes = this.getPanes();
+					let div = this.div;
+					if (!div) {
+						div = this.div = $(`
+							<div class="astb-map-marker">
+								<div class="aste-marker-flag">
+									${this.args.number}
+								</div>
+								<div class="aste-marker-point"></div>
+							</div>
+						`).css({ "position": "absolute" });
+						div.on('mouseover', (e) => {
+							div.addClass('astm-hover');
+						});
+						div.on('mouseout', (e) => {
+							div.removeClass('astm-hover');
+						});
+						div.click(this.args.chooseLocation);
+						$(panes.overlayImage).append(div);
+					}
+					let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+					if (point) {
+						div.css({ "left": `${point.x - 15}px`, "top": `${point.y - 15}px` });
+					}
+				}
+				remove() {
+					if (this.div) {
+						this.div.parentNode.removeChild(this.div);
+						this.div = null;
+					}
+				}
+				getPosition() {
+					return this.latlng;	
+				}
+			}
+
+			class PopUp {
+				constructor(popup, subpopup, innerSelector) {
+					this.popup = popup;
+					this.subpopup = subpopup;
+					this.inner = this.popup.find(innerSelector);
+				}
+				renderPopup(html, closers, additionalClass) {
+					this.popup.addClass('astm-show');
+					if (additionalClass) this.popup.addClass(additionalClass);
+					this.inner.html(html);
+					this.popup.click((e) => {
+						if ($(e.target).is(this.popup)) this.closePopup(additionalClass);
+					});
+					$(closers).click((e) => {
+						if ($(e.target).is($(closers))) this.closePopup(additionalClass);
+					});
+				}
+				renderSubpopup(html) {
+					this.popup.scrollTop(0).css({ 'overflow': 'hidden' });
+					this.subpopup
+						.addClass('astm-show')
+						.html(html);
+					this.subpopup.click((e) => {
+						if ($(e.target).is(this.subpopup)) this.closeSubpopup();
+					});
+				}
+				closePopup(additionalClass) {
+					this.popup.removeClass('astm-show');
+					if (additionalClass) this.popup.removeClass(additionalClass);
+					this.inner.empty();
+				}
+				closeSubpopup() {
+					this.subpopup.removeClass('astm-show').empty();
+					this.popup.removeAttr('style');
+				}
+			}
+
+			let popupEl = $('.astb-popup');
+			let subpopupEl = popupEl.find('.aste-subpopup');
+			let popup = new PopUp(popupEl, subpopupEl, '.aste-popup-inner');
+
+			class Locations {
+				constructor() {
+					this.locations = [];
+				}
+				renderLoc(locations, list, map, wrapper, submit) {
+					this.wrapper = wrapper;
+					this.submit = submit;
+					this.locations = locations;
+					let locationHtml = '';
+					for (let i = 0; i < this.locations.length; i++) {
+						this.locations[i].listItem = $(`
+							<li class="aste-locations-item">
+								<div class="astb-location">
+									<div class="aste-location-number">${this.locations[i].sort_order}</div>
+									<div class="aste-location-title">${this.locations[i].title}</div>
+									<div class="aste-location-address">${this.locations[i].address}</div>
+									<div class="aste-location-additional">${this.locations[i].additional}</div>
+									<div class="aste-location-links">
+										<div class="aste-location-link">Разместить рекламу здесь</div>
+										<div class="aste-location-link astm-photos">Фотографии ЖК</div>
+									</div>
+								</div>
+							</li>
+						`).click(() => this.chooseLocation(this.locations[i], 'listItem'));
+						this.locations[i].listItem
+							.find('.aste-location-link.astm-photos')
+							.click((e) => {
+								this.loadPhotos(this.locations[i]);
+								e.stopPropagation();
+							});
+						this.locations[i].marker = new CustomMarker(
+							new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng), 
+							map, 
+							{ 
+								number: this.locations[i].sort_order,
+								chooseLocation: () => this.chooseLocation(this.locations[i], 'marker')
+							}
+						);
+						list.append(this.locations[i].listItem);
+					}
+					this.submit.click(() => {
+					if (this.chosen.length === 0) return;
+						popup.renderPopup(this.renderSubmitForm(), '.aste-location-add, .aste-form-close');
+					});
+				}
+				get chosen() {
+					return this.locations.filter(location => location.chosen);
+				}
+				chooseLocation(location, emitter) {
+					location.chosen = !location.chosen;
+					if (emitter === 'marker') {
+						this.wrapper.addClass('astm-got-changes');
+						setTimeout(() => this.wrapper.removeClass('astm-got-changes'), 300);
+					}
+					if (location.chosen) {
+						location.listItem.find('.astb-location').addClass('astm-chosen');
+						location.marker.div.addClass('astm-chosen');
+					} else {
+						location.listItem.find('.astb-location').removeClass('astm-chosen');
+						location.marker.div.removeClass('astm-chosen');
+					}
+					if (this.chosen.length > 0) {
+						this.wrapper.addClass('astm-got-locations');
+						this.submit.addClass('astm-got-locations');
+					} else {
+						this.wrapper.removeClass('astm-got-locations');
+						this.submit.removeClass('astm-got-locations');
+					}
+				}
+				loadPhotos(location) {
+					popup.renderPopup(loader, '', 'astm-photos');
+					$.ajax(`/api/photos/${location.id}`, {
+						success: (photos) => {
+							let subpopupEmmiter = $(photos).find('')
+							popup.renderPopup(photos, '', 'astm-photos');
+							popup.popup.find('img').on('load', () => {
+								let stretchAndCenterPhotos = () => stretchAndCenter($('.aste-popup-photo-wrapper'), '.aste-popup-photo');
+								stretchAndCenterPhotos();
+							});
+							popup.popup.find('.aste-popup-photo-wrapper').click(function(e) {
+								let html = `<img class="aste-subpopup-image" src="${$(this).attr('data-src-full')}">`;
+								popup.renderSubpopup(html);
+							});
+						},
+						error: (err) => {
+							loader.remove();
+							popup.renderPopup('.aste-popup-inner').append(errMessage);
 						}
 					});
-					item.find('.aste-location-link.astm-photos').click((e) => {
-						e.stopPropagation();
-						popup.addClass('astm-show');
-						popup.find('.aste-popup-inner').append(loader);
-						// TODO
-						$.ajax(`/as-team/photos?id=${locations[i].id}`, {
-							success: (photos) => {
-								loader.remove();
-								popup.find('.aste-popup-inner').append(photos);
-								popup.find('img').on('load', () => {
-									let stretchAndCenterPhotos = () => stretchAndCenter($('.aste-popup-photo-wrapper'), '.aste-popup-photo');
-									stretchAndCenterPhotos();
-									window.addEventListener('resize', stretchAndCenterPhotos);
-								});
-								popup.find('.aste-popup-photo-wrapper').click(function() {
-									popup.scrollTop(0).css({ 'overflow': 'hidden' });
-									subpopup
-										.addClass('astm-show')
-										.append(`<img class="aste-subpopup-image" src="${$(this).attr('data-src-full')}">`);
-									subpopup.click(function(e) {
-										if (!$(e.target).is('.aste-subpopup-image')) {
-											$(this).stop().animate({
-												'opacity': 0
-											}, 300, function() {
-												$(this)
-													.removeClass('astm-show')
-													.empty()
-													.removeAttr('style');
-												popup.removeAttr('style');
-											});
-										}
-									});
-								});
-							},
-							error: (err) => {
-								loader.remove();
-								popup.find('.aste-popup-inner').append(errMessage);
+				}
+				renderSubmitForm() {
+					let form = $(`
+						<form class="astb-form astm-locations">
+							<div class="aste-form-title">Заказать размещение</div>
+							<div class="aste-form-close"></div>
+							<input name="name" class="aste-form-input aste-form-name" placeholder="Как к Вам обращаться?">
+							<input name="phone" class="aste-form-input aste-form-phone" placeholder="Ваш номер телефона">
+							<div class="aste-form-locations">
+							</div>
+							<button type="submit" class="aste-form-submit">Отправить</button>
+						</form>
+					`);
+					let formLocations = form.find('.aste-form-locations');
+					for (let location of this.chosen) {
+						let locationHtml = $(`
+							<div class="aste-form-location">
+								<div class="aste-location-title">
+									${location.title}
+								</div>
+								<div class="aste-location-delete"></div>
+							</div>
+						`);
+						locationHtml.find('.aste-location-delete').click(() => {
+							this.chooseLocation(location);
+							locationHtml.remove();
+							if (this.chosen.length === 0) {
+								popup.closePopup();
 							}
 						});
-					});
-				}
-
-				$(document).on(chooseLocation.type, (e, param) => {
-					let location = locations[param - 1];
-					location.listItem.addClass('astm-chosen');
-					location.marker.div.addClass('astm-chosen');
-					location.chosen = true;
-				});
-
-				$(document).on(unchooseLocation.type, (e, param) => {
-					let location = locations[param - 1];
-					location.listItem.removeClass('astm-chosen');
-					location.listItem.addClass('astm-just-unchosen');
-					location.listItem.on('mouseover', (e) => {
-						location.listItem.removeClass('astm-just-unchosen');
-					});
-					location.marker.div.removeClass('astm-chosen');
-					location.chosen = false;
-				});
-
-				$(document).on(`${chooseLocation.type} ${unchooseLocation.type}`, () => {
-					let locationsWrapper = $('.aste-locations-list-wrapper');
-					locationsWrapper.addClass('astm-got-changes');
-					setTimeout(() => locationsWrapper.removeClass('astm-got-changes'), 300);
-					let chosenLocations = locations.filter((location) => location.chosen);
-					if (chosenLocations.length > 0) {
-						locationsWrapper.addClass('astm-got-locations');
-						submitLocations.addClass('astm-got-locations');
-					} else {
-						locationsWrapper.removeClass('astm-got-locations');
-						submitLocations.removeClass('astm-got-locations');
+						formLocations.append(locationHtml);
 					}
-				});
-
-				submitLocations.click(() => {
-					if (locations.filter((location) => location.chosen).length === 0) return;
-					popup
-						.addClass('astm-show astm-form')
-						.find('.aste-popup-inner')
-						.append(submitForm());
-					popup.find('.aste-form-phone').mask('+7 (999) 999-99-99');
-					popup.find('.aste-location-add, .aste-form-close').click(() => {
-						popup._astf_close();
+					let locationAdd = $('<div class="aste-location-add"></div>').click(() => {
+						$('.aste-location-number').addClass('astm-green');
+						setTimeout(() => $('.aste-location-number').removeClass('astm-green'), 300);
 					});
-					popup.find('.aste-location-delete').click(function() {
-						let formLocations = $(this).parents('.aste-form-locations');
-						let id = +$(this).attr('data-id');
-						let number;
-						for (let i = 0; i < locations.length; i++) {
-							if (locations[i].id === id) {
-								locations[i].chosen = false;
-								number = locations[i].number;
+					formLocations.append(locationAdd);
+					form.find('.aste-form-phone').mask('+7 (999) 999-99-99');
+					form.change(() => {
+						let formSubmit = form.find('.aste-form-submit');
+						if (formSubmit.hasClass('astm-error')) {
+							form.find('.aste-form-submit').removeClass('astm-error').text('Отправить');
+							form.find('.aste-form-input').removeClass('astm-error');
+						}
+					});
+					form.submit((e) => {
+						e.preventDefault();
+						let formContent = {
+							name: e.target[0].value,
+							phone: e.target[1].value,
+							locations: this.chosen.map(location => location.id)
+						};
+						let error = false;
+						let thankYou = $(`
+							<div class="astb-form astm-thank-you">
+								<div class="aste-form-title">Заказать размещение</div>
+								<div class="aste-form-close"></div>
+								<p class="aste-form-text">Заявка на размещение успешно отправлена. Мы свяжемся с Вами в ближайшее время для уточнения всех деталей и ответим на все Ваши вопросы.</p>
+								<button class="aste-form-submit">Закрыть</button>
+							</div>
+						`);
+						for (let prop in formContent) {
+							if (formContent[prop] === '') {
+								error = true;
+								form.find(`.aste-form-input.aste-form-${prop}`).addClass('astm-error');
 							}
 						}
-						$(document).trigger(unchooseLocation, number);
-						$(this).parents('.aste-form-location').remove();
-						if (formLocations.find('.aste-form-location').length === 0) {
-							popup._astf_close();
-						}
+						if (error) {
+							form.find('.aste-form-submit').addClass('astm-error').text('Все поля обязательны')
+						} else {
+							popup.renderPopup(loader);
+							$.ajax('/api/form', {
+								method: 'POST',
+								data: formContent,
+								success: (res) => {
+									popup.renderPopup(thankYou, '.aste-form-close, .aste-form-submit');
+								},
+								error: (err) => {
+									console.log(err);
+									popup.renderPopup(errMessage);
+								}
+							})
+						};
 					});
-					popup.find('.astb-form').submit((e) => {
-						e.preventDefault();
-						console.log(e);
-					});
-				});
+					return form;
+				}
+			}
+
+			let locations = new Locations();
+			let locationsListWrapper = $('.astb-locations .aste-locations-list-wrapper');
+			let locationsList = $('.astb-locations ul.aste-locations-list');
+			let submitLocations = $('.aste-locations-submit');
+
+			let gotLocations = (resLocations) => {
+
+				locations.renderLoc(
+					resLocations,
+					locationsList,
+					locationsMap,
+					locationsListWrapper,
+					submitLocations
+				);
+
+				loader.remove();
 
 			};
 
 			locationsListWrapper.append(loader);
 
 			// TODO
-			$.ajax('/as-team/locations', {
+			$.ajax('/api/locations', {
 				success: gotLocations,
 				error: (err) => {
 					loader.remove();

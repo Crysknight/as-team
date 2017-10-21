@@ -36,6 +36,10 @@
 		font-size: 15px;
 		font-weight: 600;
 		color: $astCWhite;
+		transition: all 0.3s;
+		&.astm-green {
+			background-color: $astCYellowGreen;
+		}
 	}
 	.aste-location-title {
 		margin-bottom: 8px;

@@ -316,6 +316,22 @@ $(document).ready(() => {
 				}
 			});
 
+			if ($('html.mobile, html.tablet').length > 0) {
+				let locationsMapWrapper = $('.aste-locations-map-wrapper');
+				let switchers = $('.aste-switcher-switch');
+				switchers.click(function() {
+					switchers.removeClass('astm-switched');
+					$(this).addClass('astm-switched');
+					if ($(this).hasClass('astm-list')) {
+						locationsListWrapper.addClass('astm-switched');
+						locationsMapWrapper.removeClass('astm-switched');
+					} else {
+						locationsListWrapper.removeClass('astm-switched');
+						locationsMapWrapper.addClass('astm-switched');
+					}
+				})
+			}
+
 		});
 	}
 });

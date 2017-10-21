@@ -29,6 +29,7 @@ import './components/accom-slider';
 import './components/company-paging';
 import './components/navbar';
 import './components/locations';
+import './components/contacts-map';
 
 
 device.addClasses(document.documentElement);
@@ -48,4 +49,4 @@ if ($('html.ios').length > 0) {
 /* < MANUAL IMPORTS > */
 /* =================================================================================================== */
 
-import '../img/logo-colour.svg';
+import '../img/logo.svg';

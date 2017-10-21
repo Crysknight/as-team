@@ -1,0 +1,61 @@
+.astb-contacts {
+	min-height: calc(100vh - 134px);
+	padding: 75px 0 80px;
+	background-color: $astCAlmostWhite;
+	.aste-primary, .aste-secondary {
+		font-size: 35px;
+		line-height: 1.3;
+		text-align: center;
+		@include respond-to(md) {
+			font-size: 30px;
+		}
+		@include respond-to(sm) {
+			font-size: 25px;
+		}
+		@include respond-to(xs) {
+			font-size: 20px;
+		}
+	}
+	.aste-secondary {
+		margin-bottom: 40px;
+	}
+	.aste-map-info {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.aste-map {
+		flex: 0 0 71%;
+		max-width: 71%;
+		height: 300px;
+		@include respond-custom(320px, $md) {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
+	.aste-info {
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-around;
+		flex: 0 0 29%;
+		max-width: 29%;
+		padding-left: 40px;
+		@include respond-custom(320px, $md) {
+			flex: 0 0 100%;
+			max-width: 100%;
+			margin-top: 40px;
+			padding-left: 0;
+		}
+		& > * {
+			width: 100%;
+		}
+	}
+	.aste-info-title {
+		font-size: 15px;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+	.aste-info-value {
+		margin-bottom: 20px;
+		font-size: 15px;
+	}
+}

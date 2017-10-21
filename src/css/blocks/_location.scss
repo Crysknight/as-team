@@ -9,6 +9,9 @@
 	cursor: pointer;
 	box-shadow: 0 0 0 0 transparentize($astCYellowGreen, 0.95);
 	transition: all 0.3s;
+	@include respond-to(md) {
+		padding-left: 60px;
+	}
 	&:hover {
 		box-shadow: 0 0 0 5px transparentize($astCYellowGreen, 0.5);
 	}
@@ -37,6 +40,9 @@
 		font-weight: 600;
 		color: $astCWhite;
 		transition: all 0.3s;
+		@include respond-to(md) {
+			left: 15px;
+		}
 		&.astm-green {
 			background-color: $astCYellowGreen;
 		}
@@ -60,6 +66,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		flex-wrap: wrap;
 		margin-top: 20px;
 		.aste-location-link {
 			font-size: 14px;

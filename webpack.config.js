@@ -122,6 +122,11 @@ module.exports = {
 			template: 'src/locations.html',
 			minify: false
 		}),
+		new HtmlWebpackPlugin({
+			filename: 'contacts.html',
+			template: 'src/contacts.html',
+			minify: false
+		}),
 		new CleanWebpackPlugin(['dist'])
 	],
 	devServer: {

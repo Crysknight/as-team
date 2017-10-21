@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AS Team - Контакты</title>
+</head>
+<body>
+
+
+
+	${ 
+		require('./html/navbar.html')
+			.replace(
+				/([\s\S]*?)aste-navitem([\s\S]*?)aste-navitem([\s\S]*?)aste-navitem([\s\S])/, 
+				'$1aste-navitem$2aste-navitem$3aste-navitem astm-active$4'
+			)
+	}
+
+
+
+	<div class="astb-contacts">
+		<div class="container">
+			<div class="aste-primary">Связаться с нами</div>
+			<div class="aste-secondary">Наши контакты</div>
+			<div class="aste-map-info">
+				<div class="aste-map"></div>
+				<div class="aste-info">
+					<div class="aste-info-title">Офис в Москве</div>
+					<div class="aste-info-value">125367, г. Москва, Полесский проезд, д. 16</div>
+					<div class="aste-info-title">Контактный телефон</div>
+					<div class="aste-info-value">+7 (495) 609-69-88</div>
+					<div class="aste-info-title">Адрес электронной почты</div>
+					<div class="aste-info-value">info@as-team.ru</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	${ require('./html/footer.html') }
+
+
+
+</body>
+</html>

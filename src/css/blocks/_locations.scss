@@ -1,8 +1,43 @@
 .astb-locations {
 	display: flex;
+	position: relative;
+	height: calc(100vh - 134px);
+	overflow: hidden;
+	html.mobile &, html.tablet {
+		height: calc(100vh - 184px);
+	}
+	.aste-listmap-switcher {
+		display: flex;
+		width: 100%;
+		height: 50px;
+		position: absolute;
+		top: 0;
+		html.desktop & {
+			display: none;
+		}
+		.aste-switcher-switch {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 50%;
+			height: 50px;
+			font-size: 15px;
+			font-weight: 60;
+			text-transform: uppercase;
+			color: $astCYellowGreen;
+			&.astm-switched, &:hover {
+				background-color: $astCYellowGreen;
+				color: $astCWhite;
+			}
+		}
+	}
 	.aste-locations-list-wrapper,
 	.aste-locations-map-wrapper {
 		height: calc(100vh - 134px);
+		html.mobile &, html.tablet {
+			margin-top: 50px;
+			height: calc(100vh - 184px);
+		}
 	}
 	.aste-locations-list-wrapper {
 		flex: 0 0 36.5%;
@@ -13,11 +48,26 @@
 		overflow: auto;
 		transition: all 0.3s;
 		box-shadow: inset 0 0 0 transparentize($astCYellowGreen, 0.95);
+		@include respond-to(md) {
+			flex: 0 0 45%;
+			max-width: 45%;
+		}
+		@include respond-custom(320px, $md) {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		html.mobile &, html.tablet & {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
 		&.astm-got-changes {
 			box-shadow: inset -30px 0 0 transparentize($astCYellowGreen, 0.5);
 		}
 		&.astm-got-locations {
 			padding-bottom: 80px;
+		}
+		&.astm-switched {
+			order: -1;
 		}
 		.astb-loader {
 			.aste-loader-circle {
@@ -42,6 +92,21 @@
 	.aste-locations-map-wrapper {
 		flex: 0 0 63.5%;
 		max-width: 63.5%;
+		@include respond-to(md) {
+			flex: 0 0 55%;
+			max-width: 55%;
+		}
+		@include respond-custom(320px, $md) {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		html.mobile &, html.tablet & {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+		&.astm-switched {
+			order: -1;
+		}
 		.aste-locations-map {
 			height: 100%;
 		}
@@ -53,7 +118,7 @@
 		width: 36.5%;
 		height: 0;
 		position: absolute;
-		bottom: 50px;
+		bottom: 0;
 		background-color: $astCYellowGreen;
 		font-size: 15px;
 		font-weight: 600;
@@ -61,6 +126,9 @@
 		color: transparent;
 		transition: all 0.3s;
 		cursor: pointer;
+		html.mobile &, html.tablet & {
+			width: 100%;
+		}
 		&.astm-got-locations {
 			height: 50px;
 			color: $astCWhite;

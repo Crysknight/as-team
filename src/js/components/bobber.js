@@ -66,7 +66,7 @@ class NavBobber {
 }
 
 $(document).ready(() => {
-	if ($('html.mobile, html.tablet').length === 0) {
+	if ($('html.mobile, html.tablet').length === 0 && $('.astb-navbar').length > 0) {
 		const navBobber = new NavBobber('.astb-navbar .aste-navbar-list', '.aste-navitem', '.astm-active');
 	}
 });

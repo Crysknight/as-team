@@ -35,46 +35,15 @@
 
 
 
-	${ 
-		require('./html/navbar.html')
-			.replace(
-				/([\s\S]*?)aste-navitem([\s\S]*?)aste-navitem([\s\S])/, 
-				'$1aste-navitem$2aste-navitem astm-active$3'
-			)
-	}
-
-
-
-	<div class="astb-locations">
-		<!-- TODO: -->
-		<div class="aste-listmap-switcher">
-			<div class="aste-switcher-switch astm-switched astm-list">Списком</div>
-			<div class="aste-switcher-switch astm-map">На карте</div>
+	<div class="astb-404">
+		<div class="aste-404-logo"><img src="./img/logo.svg" alt=""></div>
+		<div class="aste-404-content">
+			<div class="aste-primary">Ошибка 404</div>
+			<div class="aste-secondary">Этой страницы не существет</div>
+			<a href="/" class="aste-404-link">На главную</a>
 		</div>
-		<!-- /TODO -->
-		<div class="aste-locations-list-wrapper">
-			<h2 class="aste-locations-list-title">Жилые комплексы</h2>
-			<ul class="aste-locations-list">
-				<!-- Here be locations -->
-			</ul>
-		</div>
-		<div class="aste-locations-map-wrapper">
-			<div class="aste-locations-map"></div>
-		</div>
-		<div class="aste-locations-submit">Заказать размещение</div>
+		<div class="aste-404-footer">Copyright © 2017 AS-Team. Все права защищены.</div>
 	</div>
-
-
-
-	<div class="astb-popup">
-		<div class="aste-popup-inner">
-		</div>
-		<div class="aste-subpopup"></div>
-	</div>
-
-
-
-	${ require('./html/footer.html') }
 
 
 

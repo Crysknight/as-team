@@ -127,6 +127,11 @@ module.exports = {
 			template: 'src/contacts.html',
 			minify: false
 		}),
+		new HtmlWebpackPlugin({
+			filename: '404.html',
+			template: 'src/404.html',
+			minify: false
+		}),
 		new CleanWebpackPlugin(['dist'])
 	],
 	devServer: {

@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
 				this.screens = this.screensSlider.find(this.screensSelector);
 				this.screensMargin = +this.screens.css('margin-left').replace(/px/, '');
 				this.screenSpace = -(this.screens.outerWidth() + this.screensMargin);
+				this.sliderSpeed = 10000;
 				if (this.screens.length <= 8 && this.screens.length > 3) {
 					for (let i = 0; i < this.screens.length; i++) {
 						let fillerScreen = this.screens.eq(i).clone();
@@ -29,7 +30,7 @@ window.addEventListener('load', () => {
 			steepIsThePath() {
 				this.screens.eq(0).animate({
 					'margin-left': this.screenSpace
-				}, 10000, 'linear', () => {
+				}, this.sliderSpeed, 'linear', () => {
 					let outtake = this.screens.eq(0);
 					outtake.remove();
 					this.screens = this.screensSlider.find(this.screensSelector);
@@ -44,6 +45,11 @@ window.addEventListener('load', () => {
 		const screensSlider = new ScreensSlider({
 			screensSlider: '.astb-screens-slider .aste-slider-track',
 			screens: '.aste-screen-wrapper'
+		});
+		window.addEventListener('click', () => {
+			if (screensSlider.sliderSpeed > 100) {
+				screensSlider.sliderSpeed -= 100;
+			}
 		});
 	}
 });

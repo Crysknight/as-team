@@ -49,6 +49,7 @@
 		overflow: hidden;
 		opacity: 0;
 		transition: all 0.65s;
+		user-select: none;
 		&.astm-active {
 			z-index: 65;
 			opacity: 1;

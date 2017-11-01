@@ -1,5 +1,5 @@
 class NavBobber {
-	constructor(navList, navItems, activeMod, ) {
+	constructor(navList, navItems, activeMod) {
 		this.navList = $(navList);
 		this.navItemsSelector = navItems;
 		this.navItems = this.navList.find(navItems);

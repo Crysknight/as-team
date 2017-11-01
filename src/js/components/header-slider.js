@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 				this.activeElement = 0;
 				this.leftArrow.click(this.prev.bind(this));
 				this.rightArrow.click(this.next.bind(this));
-				this.leftArrow.addClass('astm-inactive');
+				// this.leftArrow.addClass('astm-inactive');
 				this.expandArrows();
 				window.addEventListener('resize', this.expandArrows.bind(this));
 			}
@@ -30,21 +30,25 @@ window.addEventListener('load', () => {
 				}
 			}
 			prev() {
-				this.rightArrow.removeClass('astm-inactive');
+				// this.rightArrow.removeClass('astm-inactive');
 				if (this.activeElement > 0) {
 					this.activeElement--;
-					if (this.activeElement === 0) {
-						this.leftArrow.addClass('astm-inactive');
-					}
+					// if (this.activeElement === 0) {
+						// this.leftArrow.addClass('astm-inactive');
+					// }
+				} else {
+					this.activeElement = this.slide.length - 1;
 				}
 			}
 			next() {
-				this.leftArrow.removeClass('astm-inactive');
+				// this.leftArrow.removeClass('astm-inactive');
 				if (this.activeElement < this.slide.length - 1) {
 					this.activeElement++;
-					if (this.activeElement === this.slide.length - 1) {
-						this.rightArrow.addClass('astm-inactive');
-					}
+					// if (this.activeElement === this.slide.length - 1) {
+						// this.rightArrow.addClass('astm-inactive');
+					// }
+				} else {
+					this.activeElement = 0;
 				}
 			}
 			expandArrows() {

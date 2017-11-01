@@ -23,6 +23,7 @@ import './utils/jquery.maskedinput';
 
 import './components/bobber';
 import './components/header-slider';
+import './components/percent-counters';
 import './components/screens-slider';
 import './components/screens-info';
 import './components/accom-slider';

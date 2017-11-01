@@ -18,25 +18,28 @@
 	.aste-info-blocks {
 		height: 100vh;
 		position: relative;
+		html.mobile &, html.tablet & {
+			height: auto;
+		}
 	}
 	.aste-info-block {
 		display: flex;
 		align-items: center;
 		width: 100%;
 		height: 100vh;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 60;
-		opacity: 0;
+		// position: absolute;
+		// top: 0;
+		// left: 0;
+		// z-index: 60;
+		// opacity: 0;
 		transition: all 0.3s;
 		.aste-block-content {
 			transition: all 0.55s;
 			transform: translateY(30px);
 		}
 		&.astm-active {
-			z-index: 65;
-			opacity: 1;
+			z-index: 65 !important;
+			opacity: 1 !important;
 			.aste-block-content {
 				transition: all 0.55s;
 				transform: translateY(0px);
@@ -64,6 +67,10 @@
 		margin: 0 -30px;
 		@include respond-custom(320px, $md) {
 			margin: 0;
+		}
+		@include respond-to(xs) {
+			width: 50%;
+			margin: 0 auto;
 		}
 		.aste-block-image {
 			width: 100%;

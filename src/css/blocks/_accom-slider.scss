@@ -38,7 +38,14 @@
 		}
 	}
 	.aste-slide {
+		display: block;
 		padding: 0 15px;
+		&:focus {
+			outline: none;
+		}
+		&:hover {
+			text-decoration: none;
+		}
 	}
 	.aste-slide-image-wrapper {
 		height: 230px;
@@ -55,8 +62,10 @@
 		margin-top: 25px;
 		font-size: 21px;
 		font-weight: 600;
+		color: $astCBlack;
 	}
 	.aste-accom-address {
 		opacity: 0.85;
+		color: $astCBlack;
 	}
 }

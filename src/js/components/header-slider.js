@@ -19,9 +19,20 @@ window.addEventListener('load', () => {
 				// this.leftArrow.addClass('astm-inactive');
 				this.expandArrows();
 				window.addEventListener('resize', this.expandArrows.bind(this));
+				this.resetAutoplay();
+			}
+			resetAutoplay() {
+				clearInterval(this.apInterval);
+				this.apInterval = setInterval(() => {
+					this.next();
+				}, 5000);
 			}
 			set activeElement(val) {
+				this.slide.addClass('astm-just-slided');
 				this.slide.removeClass('astm-active');
+				setTimeout(() => {
+					this.slide.removeClass('astm-just-slided');
+				}, 1000);
 				this.slide.eq(val).addClass('astm-active');
 			}
 			get activeElement() {
@@ -30,6 +41,7 @@ window.addEventListener('load', () => {
 				}
 			}
 			prev() {
+				this.resetAutoplay();
 				// this.rightArrow.removeClass('astm-inactive');
 				if (this.activeElement > 0) {
 					this.activeElement--;
@@ -41,6 +53,7 @@ window.addEventListener('load', () => {
 				}
 			}
 			next() {
+				this.resetAutoplay();
 				// this.leftArrow.removeClass('astm-inactive');
 				if (this.activeElement < this.slide.length - 1) {
 					this.activeElement++;

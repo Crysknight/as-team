@@ -17,6 +17,7 @@ $(document).ready(() => {
 				</div>
 			`);
 			let errMessage = '<div class="aste-secondary">Что-то пошло не так. Перезагрузите страницу</div>';
+			let markersReady = $.Event('MARKERS_READY');
 
 			let locationsMap = new google.maps.Map(document.querySelector('.aste-locations-map'), {
 				center: { lat: 55.755246, lng: 37.622088 },
@@ -51,6 +52,7 @@ $(document).ready(() => {
 						});
 						div.click(this.args.chooseLocation);
 						$(panes.overlayImage).append(div);
+						$(document).trigger(markersReady, this.args.number);
 					}
 					let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 					if (point) {
@@ -119,6 +121,7 @@ $(document).ready(() => {
 					this.locations = locations;
 					let locationHtml = '';
 					for (let i = 0; i < this.locations.length; i++) {
+						this.locations[i].number = i + 1;
 						this.locations[i].listItem = $(`
 							<li class="aste-locations-item">
 								<div class="astb-location">
@@ -163,19 +166,33 @@ $(document).ready(() => {
 						this.wrapper.addClass('astm-got-changes');
 						setTimeout(() => this.wrapper.removeClass('astm-got-changes'), 300);
 					}
-					if (location.chosen) {
-						location.listItem.find('.astb-location').addClass('astm-chosen');
-						location.marker.div.addClass('astm-chosen');
-					} else {
-						location.listItem.find('.astb-location').removeClass('astm-chosen');
-						location.marker.div.removeClass('astm-chosen');
+					let proceedChoosing = () => {
+						if (location.chosen) {
+							location.listItem.find('.astb-location').addClass('astm-chosen');
+							location.marker.div.addClass('astm-chosen');
+						} else {
+							location.listItem.find('.astb-location').removeClass('astm-chosen');
+							location.marker.div.removeClass('astm-chosen');
+						}
+						if (this.chosen.length > 0) {
+							this.wrapper.addClass('astm-got-locations');
+							this.submit.addClass('astm-got-locations');
+						} else {
+							this.wrapper.removeClass('astm-got-locations');
+							this.submit.removeClass('astm-got-locations');
+						}
 					}
-					if (this.chosen.length > 0) {
-						this.wrapper.addClass('astm-got-locations');
-						this.submit.addClass('astm-got-locations');
+					if (emitter === 'url') {
+						$(document).on(markersReady.type, (e, number) => {
+							console.log(location.number, number);
+							if (location.number === number) proceedChoosing();
+							let positionTop = location.listItem.position().top;
+							$('.aste-locations-list-wrapper').animate({
+								scrollTop: positionTop
+							}, 300);
+						});
 					} else {
-						this.wrapper.removeClass('astm-got-locations');
-						this.submit.removeClass('astm-got-locations');
+						proceedChoosing();
 					}
 				}
 				loadPhotos(location) {
@@ -303,11 +320,17 @@ $(document).ready(() => {
 
 				loader.remove();
 
+				let prechosenLocation = window.location.hash.replace(/#id=/, '');
+				if (prechosenLocation !== '') {
+					for (let location of locations.locations) {
+						if (+prechosenLocation === location.id) locations.chooseLocation(location, 'url');
+					}
+				}
+
 			};
 
 			locationsListWrapper.append(loader);
 
-			// TODO
 			$.ajax('/api/locations', {
 				success: gotLocations,
 				error: (err) => {

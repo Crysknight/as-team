@@ -48,7 +48,7 @@ window.addEventListener('load', function() {
 				catchYa() {
 					if ($(window).scrollTop() > this.infoSliderOffset) {
 						this.belowSlider = true;
-						this.activeBlock = this.infoBlocks.length - 1;
+						this.activeBlock = 'from below';
 					}
 					window.addEventListener('scroll', () => {
 						if ($(window).scrollTop() > this.infoSliderOffset && !this.belowSlider) {
@@ -116,6 +116,10 @@ window.addEventListener('load', function() {
 						this.cooldown = setTimeout(() => {
 							this.onCooldown = false;
 						}, 400);
+					}
+					if (val === 'from below') {
+						this.infoBlocks.removeClass('astm-active');
+						this.infoBlocks.eq(this.infoBlocks.length - 1).addClass('astm-active');
 					}
 				}
 				get activeBlock() {
